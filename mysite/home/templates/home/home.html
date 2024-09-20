@@ -2,6 +2,42 @@
 {% load static %}
 {% block title %}Home{% endblock title %}
 
+{% block banner-slider %}
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'home/images/banner/b1.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item"></div>
+                <img src="{% static 'home/images/banner/b2.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'home/images/banner/b3.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'home/images/banner/b4.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+        </div>
+    </div>
+{% endblock banner-slider %}
+
+{% block information %}
+<div class="container">
+    <div class="row bg-success text-center p-5 text-white border-bottom shadow">
+        <small class="fs-5">We offer products made with refined groundnut oil and refined soyabean oil. None of our product have palm oil.<br/>
+            Our savory product are perfect belnd of spices and perfect to serve your spicy cravings.
+        </small>
+    </div>
+</div>
+{% endblock information %}
+
 {% block main-content %}
-    <h1>Best Namkeen</h1>
+    <div class="container">
+        <h2 class="text-center">Best Namkeen</h2>
+        <br><br>
+        <div class="row container">
+            
+        </div>
+    </div>
+    <br/><br/>
 {% endblock main-content %}
