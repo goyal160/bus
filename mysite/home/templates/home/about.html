@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+{% block banner-slider %}
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'home/images/banner/b1.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item"></div>
+                <img src="{% static 'home/images/banner/b2.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'home/images/banner/b3.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'home/images/banner/b4.jpg' %}" class="d-block w-100" alt="banner image">
+            </div>
+        </div>
+    </div>
+{% endblock banner-slider %}
+
+{% block main-content %}
+<div class="container mt-3">
+    <br>
+    <h2 class="text-center">About Us</h2>
+    <br>
+    <div class="row container">
+        <p class="fs-4 text-center">Our focus is on curating a range of namkeen that offers both nostalgia and excitement, combining the richness of traditional flavors with modern convenience. They carefully source ingredients and use time-honored methods to make these snacks, guaranteeing crispness and authentic taste. For those who crave the tangy, spicy, and crunchy delights of Indian namkeen, we provide easy access through seamless online ordering and prompt delivery services, ensuring that no one misses out on the mouthwatering experience of these delicious treats.</p>
+    </div>
+    <br><br>
+    <h2 class="text-center">Mission</h2>
+    <br>
+    <div class="row container">
+        <p class="fs-4 text-center">Passionate enthusiasts with a mission to promote and deliver the finest, authentic Indian namkeen to snack lovers everywhere. Specializing in flavorful and spicy varieties like Ujjaini Sev, Namkeen Chana Dal, and Chatpati Boondi, we are dedicated to preserving the traditional recipes of different regions while ensuring the highest quality in every bite. 
+        </p>
+    </div>
+</div>
+<br><br>
+{% endblock main-content %}
