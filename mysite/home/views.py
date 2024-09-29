@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.views import View
-from django.db.models import Count
-from .models import Product, Customer
+from django.db.models import Count, Q
+from .models import Product, Customer, Cart
 from . forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 
@@ -93,3 +94,90 @@ class UpdateAddress(View):
         else:
             messages.warning(request, "Invalid data entry. Please try again.")
         return redirect("address")
+    
+def add_to_cart(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+    product = Product.objects.get(id=product_id)
+    Cart(user=user, product=product).save()
+    return redirect('/cart')
+
+def show_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user)
+    amount = 0
+    for p in cart:
+        value = p.quantity * p.product.dp
+        amount = amount + value
+    totalamount = amount + 40
+    return render(request, 'home/add_to_cart.html', locals())
+
+class Check_out(View):
+    def get(self, request):
+        user = request.user
+        add = Customer.objects.filter(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        famount = 0
+        for p in cart_items:
+            value = p.quantity * p.product.dp
+            famount = famount + value
+        totalamount = famount + 40
+        return render(request, 'home/checkout.html', locals())
+
+def plus_cart(request):
+    if request.method == "GET":
+        pk = request.GET.get('prod_id')
+        c = Cart.objects.get(product_id=pk, user=request.user)
+        c.quantity+=1
+        c.save(update_fields=['quantity'])
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        amount = 0
+        for p in cart:
+            value = p.quantity * p.product.dp
+            amount = amount + value
+        totalamount = amount + 40
+        data={
+            'quantity':c.quantity,
+            'amount':amount,
+            'totalamount':totalamount,
+        }
+        return JsonResponse(data)
+    
+def minus_cart(request):
+    if request.method == "GET":
+        pk = request.GET.get('prod_id')
+        c = Cart.objects.get(product_id=pk, user=request.user)
+        c.quantity-=1
+        c.save(update_fields=['quantity'])
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        amount = 0
+        for p in cart:
+            value = p.quantity * p.product.dp
+            amount = amount + value
+        totalamount = amount + 40
+        data={
+            'quantity':c.quantity,
+            'amount':amount,
+            'totalamount':totalamount,
+        }
+        return JsonResponse(data)
+    
+def remove_cart(request):
+    if request.method == "GET":
+        pk = request.GET.get('prod_id')
+        c = Cart.objects.get(product_id=pk, user=request.user)
+        c.delete()
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        amount = 0
+        for p in cart:
+            value = p.quantity * p.product.dp
+            amount = amount + value
+        totalamount = amount + 40
+        data={
+            'amount':amount,
+            'totalamount':totalamount,
+        }
+        return JsonResponse(data)

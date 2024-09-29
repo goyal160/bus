@@ -74,18 +74,20 @@
               </ul>
             </li>
             <li class="nav-item mx-2">
-              <a href="#" class="nav-link text-white">Cart 4</a>
+              <a href="{% url 'show_cart' %}" class="nav-link text-white">Cart 4</a>
             </li>
             <li class="nav-item mx-2">
               <a href="#" class="nav-link text-white">Wishlist</a>
             </li>
             {% else %}
-            <li class="nav-item mx-2">
-              <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
-            </li>
-            <li class="nav-item mx-2">
-              <a href="{% url 'customer_registration' %}" class="nav-link text-white">Register</a>
-            </li>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'login' %}" >Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'customer_registration' %}" >Register</a>
+              </li>
             {% endif %}
           </ul>
         </div>
@@ -105,9 +107,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script script="{% static 'home/js/owl.carousel.min.js' %}"></script>
-    <script script="{% static 'home/js/all.min.js' %}"></script>
-    <script script="{% static 'home/js/myscript.js' %}"></script>
+    <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/all.min.js' %}"></script>
+    <script src="{% static 'home/js/myscript.js' %}"></script>
 
 </body>
 </html>
